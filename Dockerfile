@@ -12,7 +12,7 @@ COPY composer.json ./
 COPY composer.lock ./
 RUN composer install --no-scripts --no-autoloader
 COPY . ./
-RUN chown -R www-data:www-data .
 RUN composer dump-autoload --optimize && \
     composer run-script post-install-cmd
+RUN chown -R www-data:www-data .
 RUN rm -rf html && ln -s /var/www/web html
