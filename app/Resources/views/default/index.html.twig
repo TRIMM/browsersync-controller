@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- set icon = icon|default('send') -%}
+    {{ block('button_widget') }}
+{%- endblock submit_widget -%}
+
+
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        {%- if icon is not empty -%}<i class="large material-icons right">{{ icon }}</i>{%- endif -%}
+        {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+    </button>
+{%- endblock button_widget -%}
+
+
+
+{% block body %}
+<div class="row">
+    {{ form_start(form) }}
+    <div class="input-field col s8">
+        {{ form_label(form.site) }}
+        {{ form_errors(form.site) }}
+        {{ form_widget(form.site) }}
+    </div>
+    <div class="input-field col s4">
+        {{ form_label(form.save) }}
+        {{ form_widget(form.save) }}
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
