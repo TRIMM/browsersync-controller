@@ -1,3 +1,5 @@
 var/cache/*
 var/logs/*
 var/sessions/*
+vendor
+app/config/parameters.yml
