@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+    {% for website in websites %}
+    <div class="col s6 m4">
+        <div class="card medium">
+            <div class="card-image">
+                <img src="{{ asset('uploads/avatar/' ~ website.avatar) }}">
+                <span class="card-title">{{ website.name}}</span>
+            </div>
+            <div class="card-content">
+                <p>{{ website.url }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{{ path('website_edit', { 'id': website.id }) }}"  class="waves-effect waves-light btn"><i class="material-icons left">mode_edit</i>Edit</a>
+                <a href="{{ path('website_delete', { 'id': website.id }) }}"  class="waves-effect waves-light btn red"><i class="material-icons left">delete</i>Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ path('homepage') }}">Back to home</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,46 @@
+{%- block delete_row -%}
+    <div>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock delete_row -%}
+
+{%- block delete_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- set icon = icon|default('delete') -%}
+    {{ block('button_widget') }}
+{%- endblock delete_widget -%}
+
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- set icon = icon|default('send') -%}
+    {{ block('button_widget') }}
+{%- endblock submit_widget -%}
+
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        {%- if icon is not empty -%}<i class="large material-icons left">{{ icon }}</i>{%- endif -%}
+        {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+    </button>
+{%- endblock button_widget -%}
+
+{%- block file_widget -%}
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>File</span>
+            <input type="file" {{ block('widget_attributes') }}>
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Upload a new image to replace the existing one">
+        </div>
+    </div>
+{%- endblock file_widget -%}

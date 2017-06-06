@@ -1,46 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme form _self %}
-
-{%- block submit_widget -%}
-    {%- set type = type|default('submit') -%}
-    {%- set icon = icon|default('send') -%}
-    {{ block('button_widget') }}
-{%- endblock submit_widget -%}
-
-
-{%- block button_widget -%}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
-        {%- if icon is not empty -%}<i class="large material-icons right">{{ icon }}</i>{%- endif -%}
-        {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
-    </button>
-{%- endblock button_widget -%}
-
-
+{% form_theme form 'form/fields.html.twig' %}
 
 {% block body %}
-<div class="row">
+    <p class="flow-text">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+
+
     {{ form_start(form) }}
-    <div class="input-field col s8">
-        {{ form_label(form.site) }}
-        {{ form_errors(form.site) }}
-        {{ form_widget(form.site) }}
-    </div>
-    <div class="input-field col s4">
-        {{ form_label(form.save) }}
-        {{ form_widget(form.save) }}
+    <div class="row">
+        <div class="input-field col s12 m8">
+            {{ form_label(form.site) }}
+            {{ form_errors(form.site) }}
+            {{ form_widget(form.site) }}
+        </div>
+        <div class="input-field col s12 m4">
+            {{ form_label(form.save) }}
+            {{ form_widget(form.save) }}
+        </div>
     </div>
     {{ form_end(form) }}
-</div>
+
+    <div class="row">
+        {% for website in websites %}
+        <div class="col s6 m3 url-select" data-url="{{ website.url }}">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ asset('uploads/avatar/' ~ website.avatar) }}">
+                    <span class="card-title">{{ website.name }}</span>
+                </div>
+                <div class="card-action">
+                    <a href="#">Select</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

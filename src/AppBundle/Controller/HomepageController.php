@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Website;
 use AppBundle\Service\DockerCommunicator;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,7 +19,7 @@ class HomepageController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(EntityManagerInterface $em, Request $request)
     {
         /** @var FormInterface $form */
         $form = $this->createFormBuilder()
@@ -42,8 +44,12 @@ class HomepageController extends Controller
             $this->reloadBrowserSync($container);
         }
 
+        $websites = $em->getRepository('AppBundle:Website')
+            ->findAll();
+
         return $this->render('default/index.html.twig', [
             'form' => $form->createView(),
+            'websites' => $websites
         ]);
     }
 
