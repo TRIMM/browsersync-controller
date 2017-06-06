@@ -4,7 +4,7 @@ RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
   unzip
 ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN docker-php-ext-install sockets mysqli zip
+RUN docker-php-ext-install sockets intl pdo_mysql zip
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer
 WORKDIR /var/www
