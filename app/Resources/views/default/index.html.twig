@@ -2,6 +2,14 @@
 
 {% form_theme form 'form/fields.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        #form_save {
+            padding: 0 1.6rem;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <p class="flow-text">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
 
