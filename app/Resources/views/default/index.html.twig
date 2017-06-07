@@ -11,17 +11,16 @@
 {% endblock %}
 
 {% block body %}
-    <p class="flow-text">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-
+    <p class="flow-text">You can control the BrowserSync instance from this page. Select a website from the list below or enter an address in the bar.</p>
 
     {{ form_start(form) }}
     <div class="row">
-        <div class="input-field col s12 m8">
+        <div class="input-field col s12 m9">
             {{ form_label(form.site) }}
             {{ form_errors(form.site) }}
             {{ form_widget(form.site) }}
         </div>
-        <div class="input-field col s12 m4">
+        <div class="input-field col s12 m3">
             {{ form_label(form.save) }}
             {{ form_widget(form.save) }}
         </div>

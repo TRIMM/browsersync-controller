@@ -26,7 +26,7 @@ class HomepageController extends Controller
           ->add('site', TextType::class)
           ->add('save', SubmitType::class, array(
               'label' => 'Save and restart',
-              'attr' => array('class' => 'btn waves-effect waves-light')
+              'attr' => array('class' => 'btn btn-large green waves-effect waves-light')
           ))
           ->getForm();
 
